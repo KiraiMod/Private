@@ -62,16 +62,13 @@ namespace KiraiMod.Modules
 
         public static void SetRegister(ref (UdonBehaviour, string) register, Text display, string placeholder) 
         {
-            if (register.Item1 != null)
-            {
-                display.text = placeholder;
+            if (register.Item1 == _current && register.Item2 == _lastEvent)
                 register = (null, null);
-            }
-            else
-            {
-                display.text = $"{_current.name}.{_lastEvent}";
-                register = (_current, _lastEvent);
-            }
+            else register = (_current, _lastEvent);
+
+            display.text = register.Item1 != null 
+                ? placeholder 
+                : $"{_current.name}.{_lastEvent}";
         }
 
         public static void Broadcast(string eventName)
