@@ -9,6 +9,8 @@ using UnityEngine;
 namespace KiraiMod.Private
 {
     [BepInPlugin("me.kiraihooks.KiraiMod.Private", "KM.Private", "0.0.0")]
+    [BepInDependency("me.kiraihooks.KiraiMod", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("me.kiraihooks.KiraiMod.Core", BepInDependency.DependencyFlags.HardDependency)]
     public class KiraiMod : BasePlugin
     {
         AssetBundle bundle;
