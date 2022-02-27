@@ -84,6 +84,10 @@
     <EmbeddedResource Include="Lib\KiraiMod.Private.GUI.AssetBundle" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KiraiMod.Core\KiraiMod.Core.csproj">
+      <Project>{39f74ba2-cef6-47f4-b3d1-93e981ac0eab}</Project>
+      <Name>KiraiMod.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KiraiMod\KiraiMod.csproj">
       <Project>{0da10fe1-026a-4948-b1a9-9326cbc0a921}</Project>
       <Name>KiraiMod</Name>

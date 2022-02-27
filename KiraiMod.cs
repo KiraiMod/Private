@@ -1,13 +1,9 @@
-﻿using BepInEx;
+﻿global using KiraiMod.Core;
+
+using BepInEx;
 using BepInEx.IL2CPP;
-using KiraiMod.Extensions;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace KiraiMod.Private
