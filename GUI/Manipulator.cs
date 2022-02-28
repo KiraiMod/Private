@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KiraiMod.Core;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,19 +12,8 @@ namespace KiraiMod.GUI
     {
         public static Transform Body;
 
-        public static Toggle Repeater;
-        public static Toggle Networked;
-        public static Toggle Targeted;
+        private static Toggle Networked;
 
-        public static Text AlphaText;
-        public static Text BetaText;
-        public static Text GammaText;
-
-        public static Button Alpha;
-        public static Button Beta;
-        public static Button Gamma;
-
-        public static Button Broadcast;
         public static InputField BroadcastName;
 
         private static bool boundNetwork = false;
@@ -35,20 +21,21 @@ namespace KiraiMod.GUI
         public static void Setup(Transform self)
         {
             Body = self.Find(nameof(Body));
+
             Common.Window.Create(self, self.Find("Title"), Body)
                 .Dragable()
                 .Closable();
 
-            (Repeater = Body.Find(nameof(Repeater)).GetComponent<Toggle>()).onValueChanged.AddListener(new Action<bool>(state => Modules.Manipulator.Repeater = state));
+            Body.Find("Repeater").GetComponent<Toggle>().On(state => Modules.Manipulator.Repeater = state);
 
             // todo: rewrite this logic
-            (Networked = Body.Find(nameof(Networked)).GetComponent<Toggle>()).onValueChanged.AddListener(new Action<bool>(state =>
+            (Networked = Body.Find("Networked").GetComponent<Toggle>()).On(state =>
             {
                 if (!(Modules.Manipulator.networked = state))
                     boundNetwork = false;
-            }));
+            });
 
-            (Targeted = Body.Find(nameof(Targeted)).GetComponent<Toggle>()).onValueChanged.AddListener(new Action<bool>(state =>
+            Body.Find("Targeted").GetComponent<Toggle>().On(state =>
             {
                 if (Modules.Manipulator.targeted = state)
                 {
@@ -60,17 +47,14 @@ namespace KiraiMod.GUI
                 }
                 else if (boundNetwork)
                     Networked.Set(false);
-            }));
+            });
 
-            AlphaText = Body.Find("Alpha/Text").GetComponent<Text>();
-            BetaText = Body.Find("Beta/Text").GetComponent<Text>();
-            GammaText = Body.Find("Gamma/Text").GetComponent<Text>();
+            Body.Find("Alpha").GetComponent<Button>().On(() => Modules.Manipulator.SetRegister(ref Modules.Manipulator.regAlpha, Body.Find("Alpha/Text").GetComponent<Text>(), "Alpha"));
+            Body.Find("Beta").GetComponent<Button>().On(() => Modules.Manipulator.SetRegister(ref Modules.Manipulator.regBeta, Body.Find("Beta/Text").GetComponent<Text>(), "Beta"));
+            Body.Find("Gamma").GetComponent<Button>().On(() => Modules.Manipulator.SetRegister(ref Modules.Manipulator.regGamma, Body.Find("Gamma/Text").GetComponent<Text>(), "Gamma"));
 
-            (Alpha = Body.Find("Alpha").GetComponent<Button>()).onClick.AddListener(new Action(() => Modules.Manipulator.SetRegister(ref Modules.Manipulator.regAlpha, AlphaText, nameof(Alpha))));
-            (Beta =  Body.Find("Beta").GetComponent<Button>()).onClick.AddListener(new Action(() => Modules.Manipulator.SetRegister(ref Modules.Manipulator.regBeta, BetaText, nameof(Beta))));
-            (Gamma = Body.Find("Gamma").GetComponent<Button>()).onClick.AddListener(new Action(() => Modules.Manipulator.SetRegister(ref Modules.Manipulator.regGamma, GammaText, nameof(Gamma))));
+            Body.Find("Broadcast").GetComponent<Button>().On(() => Modules.Manipulator.Broadcast(BroadcastName.text));
 
-            (Broadcast = Body.Find(nameof(Broadcast)).GetComponent<Button>()).onClick.AddListener(new Action(() => Modules.Manipulator.Broadcast(BroadcastName.text)));
             BroadcastName = Body.Find(nameof(BroadcastName)).GetComponent<InputField>();
 
             Targets.Setup(Body.Find(nameof(Targets)));
