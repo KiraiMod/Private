@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using VRC.SDKBase;
+﻿using UnityEngine.UI;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace KiraiMod.Modules
+namespace KiraiMod.Private.Modules
 {
     public static class Manipulator
     {

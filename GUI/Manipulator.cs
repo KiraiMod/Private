@@ -1,11 +1,11 @@
-﻿using KiraiMod.Core;
+﻿using KiraiMod.GUI.Common;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using VRC.Udon;
 
-namespace KiraiMod.GUI
+namespace KiraiMod.Private.GUI
 {
     // aka abbez
     public static class Manipulator
@@ -22,7 +22,7 @@ namespace KiraiMod.GUI
         {
             Body = self.Find(nameof(Body));
 
-            Common.Window.Create(self, self.Find("Title"), Body)
+            Window.Create(self, self.Find("Title"), Body)
                 .Dragable()
                 .Closable();
 
@@ -102,7 +102,7 @@ namespace KiraiMod.GUI
             public static void Setup(Transform self)
             {
                 Body = self.Find(nameof(Body));
-                Common.Window.Create(self, self.Find("Title"), Body)
+                Window.Create(self, self.Find("Title"), Body)
                     .Closable();
 
                 Template = Body.Find("Scroll/Template");
@@ -119,7 +119,7 @@ namespace KiraiMod.GUI
             public static void Setup(Transform self)
             {
                 Body = self.Find(nameof(Body));
-                Common.Window.Create(self, self.Find("Title"), Body)
+                Window.Create(self, self.Find("Title"), Body)
                     .Closable();
 
                 Template = Body.Find("Scroll/Template");
