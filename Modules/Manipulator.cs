@@ -58,7 +58,7 @@ namespace KiraiMod.Private.Modules
                 register = (null, null);
             else register = (_current, _lastEvent);
 
-            display.text = register.Item1 != null 
+            display.text = register.Item1 == null
                 ? placeholder 
                 : $"{_current.name}.{_lastEvent}";
         }

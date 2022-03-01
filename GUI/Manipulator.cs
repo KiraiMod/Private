@@ -22,9 +22,9 @@ namespace KiraiMod.Private.GUI
         {
             Body = self.Find(nameof(Body));
 
-            Window.Create(self, self.Find("Title"), Body)
+            Window.Create(self)
                 .Dragable()
-                .Closable();
+                .Closable(Body.gameObject);
 
             Body.Find("Repeater").GetComponent<Toggle>().On(state => Modules.Manipulator.Repeater = state);
 
@@ -102,8 +102,8 @@ namespace KiraiMod.Private.GUI
             public static void Setup(Transform self)
             {
                 Body = self.Find(nameof(Body));
-                Window.Create(self, self.Find("Title"), Body)
-                    .Closable();
+                Window.Create(self)
+                    .Closable(Body.gameObject);
 
                 Template = Body.Find("Scroll/Template");
 
@@ -119,8 +119,8 @@ namespace KiraiMod.Private.GUI
             public static void Setup(Transform self)
             {
                 Body = self.Find(nameof(Body));
-                Window.Create(self, self.Find("Title"), Body)
-                    .Closable();
+                Window.Create(self)
+                    .Closable(Body.gameObject);
 
                 Template = Body.Find("Scroll/Template");
             }
