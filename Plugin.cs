@@ -1,24 +1,39 @@
 ﻿global using KiraiMod.Core;
 
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.IL2CPP;
+using BepInEx.Logging;
+using HarmonyLib;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
 
 namespace KiraiMod.Private
 {
-    [BepInPlugin("me.kiraihooks.KiraiMod.Private", "KM.Private", "0.0.0")]
+    [BepInPlugin(GUID, "KM.Private", "0.0.0")]
     [BepInDependency("me.kiraihooks.KiraiMod", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("me.kiraihooks.KiraiMod.Core", BepInDependency.DependencyFlags.HardDependency)]
-    public class KiraiMod : BasePlugin
+    public class Plugin : BasePlugin
     {
-        AssetBundle bundle;
+        public const string GUID = "me.kiraihooks.KiraiMod.Private";
+
+        internal static Harmony harmony;
+        internal static ManualLogSource log;
+        internal static ConfigFile cfg;
+
+        private AssetBundle bundle;
 
         public override void Load()
         {
+            log = Log;
+            harmony = new(GUID);
+            cfg = Config;
+
             Managers.ModuleManager.Register();
             Managers.GUIManager.OnLoad += GUIManager_OnLoad;
+
+            typeof(Modules.Moderations).Initialize();
         }
 
         private void GUIManager_OnLoad()

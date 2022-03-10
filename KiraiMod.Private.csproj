@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\VRChat.BepInEx\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="BepInEx.Core">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\VRChat.BepInEx\BepInEx\core\BepInEx.Core.dll</HintPath>
     </Reference>
@@ -40,6 +44,10 @@
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon-DotNet, Version=4.1.6.12, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\VRChat.BepInEx\BepInEx\unhollowed\Photon-DotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,9 +81,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KiraiMod.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="GUI\Manipulator.cs" />
     <Compile Include="Modules\Manipulator.cs" />
+    <Compile Include="Modules\Moderations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

@@ -32,10 +32,7 @@ namespace KiraiMod.Private.Modules
         public static string _lastEvent;
         public static UdonBehaviour[] _cached;
 
-        static Manipulator()
-        {
-            Events.WorldLoaded += _ => GUI.Manipulator.ShowBehaviours();
-        }
+        static Manipulator() => Events.WorldLoaded += _ => GUI.Manipulator.ShowBehaviours();
 
         public static void Send((UdonBehaviour behaviour, string eventName) reg)
         {
