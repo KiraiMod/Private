@@ -84,7 +84,6 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="GUI\Manipulator.cs" />
     <Compile Include="Modules\Manipulator.cs" />
-    <Compile Include="Modules\Moderations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

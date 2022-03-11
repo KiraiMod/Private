@@ -32,8 +32,6 @@ namespace KiraiMod.Private
 
             Managers.ModuleManager.Register();
             Managers.GUIManager.OnLoad += GUIManager_OnLoad;
-
-            typeof(Modules.Moderations).Initialize();
         }
 
         private void GUIManager_OnLoad()
