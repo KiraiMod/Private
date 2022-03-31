@@ -32,11 +32,15 @@ namespace KiraiMod.Private.Modules
         public static string _lastEvent;
         public static UdonBehaviour[] _cached;
 
-        static Manipulator() => Events.WorldLoaded += _ => GUI.Manipulator.ShowBehaviours();
+        static Manipulator() => Events.WorldInstanceLoaded += _ => GUI.Manipulator.ShowBehaviours();
 
         public static void Send((UdonBehaviour behaviour, string eventName) reg)
         {
-            if (targeted) { } // networked is assumed
+            if (targeted)
+            {
+                VRC.SDKBase.Networking.SetOwner(global::KiraiMod.Modules.Players.Target.VRCPlayerApi, reg.behaviour.gameObject);
+                reg.behaviour.SendCustomNetworkEvent(NetworkEventTarget.Owner, reg.eventName);
+            }
             else if (networked)
                 reg.behaviour.SendCustomNetworkEvent(NetworkEventTarget.All, reg.eventName);
             else reg.behaviour.SendCustomEvent(reg.eventName);
