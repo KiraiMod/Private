@@ -63,7 +63,7 @@ namespace KiraiMod.Private.GUI
         
         public static void ShowBehaviours()
         {
-            Modules.Manipulator._cached = UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
+            Modules.Manipulator._cached = UnityEngine.Object.FindObjectsOfTypeAll(UnhollowerRuntimeLib.Il2CppType.Of<UdonBehaviour>()).Cast<UnhollowerBaseLib.Il2CppReferenceArray<UdonBehaviour>>();
             for (int i = 2; i < Targets.Template.parent.childCount; i++)
                 Targets.Template.parent.GetChild(i).Destroy();
             int index = 0;

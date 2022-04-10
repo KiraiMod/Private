@@ -38,7 +38,7 @@ namespace KiraiMod.Private.Modules
         {
             if (targeted)
             {
-                VRC.SDKBase.Networking.SetOwner(global::KiraiMod.Modules.Players.Target.VRCPlayerApi, reg.behaviour.gameObject);
+                VRC.SDKBase.Networking.SetOwner(KiraiMod.Modules.Players.Target.VRCPlayerApi, reg.behaviour.gameObject);
                 reg.behaviour.SendCustomNetworkEvent(NetworkEventTarget.Owner, reg.eventName);
             }
             else if (networked)

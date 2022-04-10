@@ -6,6 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove=".git" />
+	  <None Remove=".gitignore" />
 	  <None Remove="Lib\KiraiMod.Private.GUI.AssetBundle" />
 	</ItemGroup>
 
