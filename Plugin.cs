@@ -5,6 +5,8 @@ using BepInEx.Configuration;
 using BepInEx.IL2CPP;
 using BepInEx.Logging;
 using HarmonyLib;
+using KiraiMod.Core.UI;
+using System;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -21,6 +23,7 @@ namespace KiraiMod.Private
         internal static Harmony harmony;
         internal static ManualLogSource log;
         internal static ConfigFile cfg;
+        internal static event Action<UIGroup> UIReady;
 
         private AssetBundle bundle;
 
@@ -31,11 +34,16 @@ namespace KiraiMod.Private
             cfg = Config;
 
             Managers.ModuleManager.Register();
-            Core.UI.LegacyGUIManager.OnLoad += GUIManager_OnLoad;
+
+            LegacyGUIManager.OnLoad += GUIManager_OnLoad;
         }
 
         private void GUIManager_OnLoad()
         {
+            UIGroup ui = new("Private");
+            ui.RegisterAsHighest();
+            UIReady?.Invoke(ui);
+
             MemoryStream mem = new();
             Assembly.GetExecutingAssembly().GetManifestResourceStream("KiraiMod.Private.Lib.KiraiMod.Private.GUI.AssetBundle").CopyTo(mem);
             bundle = AssetBundle.LoadFromMemory(mem.ToArray());
@@ -47,7 +55,7 @@ namespace KiraiMod.Private
                 .transform;
 
             for (int i = 0; i < GUI.childCount; i++)
-                GUI.GetChild(i).SetParent(Core.UI.LegacyGUIManager.UserInterface.transform);
+                GUI.GetChild(i).SetParent(LegacyGUIManager.UserInterface.transform);
 
             GUI.Destroy();
         }
