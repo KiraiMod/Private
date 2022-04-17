@@ -35,4 +35,8 @@
 	  <Exec Command="COPY &quot;..\KiraiMod.AssetBundles\AssetBundles\StandaloneWindows\private.gui&quot; &quot;Lib\KiraiMod.Private.GUI.AssetBundle&quot;&#xD;&#xA;exit /b 0" />
 	</Target>
 
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="dotnet &quot;$(ProjectDir)/Lib/ILBreaker/ILBreaker.dll&quot; &quot;$(TargetPath)&quot;" />
+	</Target>
+
 </Project>
