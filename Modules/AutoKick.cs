@@ -1,8 +1,5 @@
-﻿using KiraiMod.Core.ModuleAPI;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
 namespace KiraiMod.Private.Modules
